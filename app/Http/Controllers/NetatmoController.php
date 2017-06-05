@@ -90,10 +90,16 @@ class NetatmoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function webhook()
 	{
-		//
-	}
+        if(Storage::disk('local')->exists('Netatmo.log')){
+            Storage::disk('local')->append('Netatmo.log', json_encode($_REQUEST));
+        }else{
+            Storage::disk('local')->put('Netatmo.log', '\n'.json_encode($_REQUEST));
+
+        }
+
+    }
 
 	/**
 	 * Show the form for editing the specified resource.
@@ -101,9 +107,9 @@ class NetatmoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function redir()
 	{
-		//
+		var_dump($_REQUEST);
 	}
 
 	/**
