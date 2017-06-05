@@ -139,7 +139,7 @@ class NetatmoController extends Controller {
                 . "&scope=read_camera%20access_camera"
                 . "&state=" . $_SESSION['state'];
 
-            echo("<script> top.location.href='" . $dialog_url . "'<script>");
+            header('location:'.$dialog_url);
         }
 
         if($_SESSION['state'] && !empty($_GET['state']) && ($_SESSION['state']===$_GET['state'])) {
