@@ -109,8 +109,10 @@ class NetatmoController extends Controller {
 	 */
 	public function redir()
 	{
-	    var_dump($_REQUEST);
-        if($_SESSION['state'] && !empty($_GET['state']) && ($_SESSION['state']===$_GET['state'])) {
+        session_start();
+
+        var_dump($_REQUEST);
+        if(!empty($_SESSION['state']) && !empty($_GET['state']) && ($_SESSION['state']===$_GET['state'])) {
             $code = $_GET["code"];
             $token_url = "https://api.netatmo.com/oauth2/token";
 
