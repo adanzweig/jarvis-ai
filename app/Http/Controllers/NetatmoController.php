@@ -130,9 +130,9 @@ class NetatmoController extends Controller {
         $my_url = "http://adanjz.com:1000/netatmo/redir";
 
         session_start();
-        $code = $_GET["code"];
 
-        if(empty($code)) {
+
+        if(empty($_GET["code"])) {
             $_SESSION['state'] = md5(uniqid(rand(), TRUE));
             $dialog_url="https://api.netatmo.com/oauth2/authorize?client_id="
                 . $app_id . "&redirect_uri=" . urlencode($my_url)
@@ -143,6 +143,7 @@ class NetatmoController extends Controller {
         }
 
         if($_SESSION['state'] && ($_SESSION['state']===$_GET['state'])) {
+            $code = $_GET["code"];
             $token_url = "https://api.netatmo.com/oauth2/token";
 
             $postdata = http_build_query(
@@ -150,7 +151,7 @@ class NetatmoController extends Controller {
                     'grant_type' => "authorization_code",
                     'client_id' => $app_id,
                     'client_secret' => $app_secret,
-                    'code' => $_REQUEST['code'],
+                    'code' => $code,
                     'redirect_uri' => $my_url,
                     'scope' => "read_camera 20access_camera"
                 )
