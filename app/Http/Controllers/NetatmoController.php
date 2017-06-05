@@ -140,6 +140,7 @@ class NetatmoController extends Controller {
                 . "&state=" . $_SESSION['state'];
 
             header('location:'.$dialog_url);
+            die();
         }
 
         if($_SESSION['state'] && !empty($_GET['state']) && ($_SESSION['state']===$_GET['state'])) {
