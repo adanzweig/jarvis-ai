@@ -109,40 +109,7 @@ class NetatmoController extends Controller {
 	 */
 	public function redir()
 	{
-		var_dump($_REQUEST);
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function test()
-	{
-
-        // This is just an example to illustrate the documentation
-        // Prefer the PHP SDK
-
-
-        $app_id = "5928b07f65d1c4ee7a8b6f04";
-        $app_secret = "d68GlJLtPaBQ4JrXrXNZiJjE6ol2eIedWDh78AB";
-        $my_url = "http://adanjz.com:1000/netatmo/redir";
-
-        session_start();
-
-
-        if(empty($_GET["code"])) {
-            $_SESSION['state'] = md5(uniqid(rand(), TRUE));
-            $dialog_url="https://api.netatmo.com/oauth2/authorize?client_id="
-                . $app_id . "&redirect_uri=" . urlencode($my_url)
-                . "&scope=read_camera%20access_camera"
-                . "&state=" . $_SESSION['state'];
-
-            header('location:'.$dialog_url);
-            die();
-        }
-
+	    var_dump($_REQUEST);
         if($_SESSION['state'] && !empty($_GET['state']) && ($_SESSION['state']===$_GET['state'])) {
             $code = $_GET["code"];
             $token_url = "https://api.netatmo.com/oauth2/token";
@@ -180,6 +147,40 @@ class NetatmoController extends Controller {
         } else {
             echo("The state does not match. You may be a victim of CSRF.");
         }
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function test()
+	{
+
+        // This is just an example to illustrate the documentation
+        // Prefer the PHP SDK
+
+
+        $app_id = "5928b07f65d1c4ee7a8b6f04";
+        $app_secret = "d68GlJLtPaBQ4JrXrXNZiJjE6ol2eIedWDh78AB";
+        $my_url = "http://adanjz.com:1000/netatmo/redir";
+
+        session_start();
+
+
+        if(empty($_GET["code"])) {
+            $_SESSION['state'] = md5(uniqid(rand(), TRUE));
+            $dialog_url="https://api.netatmo.com/oauth2/authorize?client_id="
+                . $app_id . "&redirect_uri=" . urlencode($my_url)
+                . "&scope=read_camera%20access_camera"
+                . "&state=" . $_SESSION['state'];
+
+            header('location:'.$dialog_url);
+            die();
+        }
+
+
 
 
 	}
