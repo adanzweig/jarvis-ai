@@ -142,7 +142,7 @@ class NetatmoController extends Controller {
             echo("<script> top.location.href='" . $dialog_url . "'<script>");
         }
 
-        if($_SESSION['state'] && ($_SESSION['state']===$_GET['state'])) {
+        if($_SESSION['state'] && !empty($_GET['state']) && ($_SESSION['state']===$_GET['state'])) {
             $code = $_GET["code"];
             $token_url = "https://api.netatmo.com/oauth2/token";
 
