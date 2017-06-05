@@ -118,9 +118,68 @@ class NetatmoController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function test()
 	{
-		//
+
+        // This is just an example to illustrate the documentation
+        // Prefer the PHP SDK
+
+
+        $app_id = "5928b07f65d1c4ee7a8b6f04";
+        $app_secret = "d68GlJLtPaBQ4JrXrXNZiJjE6ol2eIedWDh78AB";
+        $my_url = "http://adanjz.com:1000/netatmo/redir";
+
+        session_start();
+        $code = $_GET["code"];
+
+        if(empty($code)) {
+            $_SESSION['state'] = md5(uniqid(rand(), TRUE));
+            $dialog_url="https://api.netatmo.com/oauth2/authorize?client_id="
+                . $app_id . "&redirect_uri=" . urlencode($my_url)
+                . "&scope=read_camera%20access_camera"
+                . "&state=" . $_SESSION['state'];
+
+            echo("<script> top.location.href='" . $dialog_url . "'<script>");
+        }
+
+        if($_SESSION['state'] && ($_SESSION['state']===$_GET['state'])) {
+            $token_url = "https://api.netatmo.com/oauth2/token";
+
+            $postdata = http_build_query(
+                array(
+                    'grant_type' => "authorization_code",
+                    'client_id' => $app_id,
+                    'client_secret' => $app_secret,
+                    'code' => $code,
+                    'redirect_uri' => $my_url,
+                    'scope' => "read_camera 20access_camera"
+                )
+            );
+
+            $opts = array('http' =>
+                array(
+                    'method'  => 'POST',
+                    'header'  => 'Content-type: application/x-www-form-urlencoded',
+                    'content' => $postdata
+                )
+            );
+
+            $context  = stream_context_create($opts);
+
+            $response = file_get_contents($token_url, false, $context);
+            $params = null;
+            $params = json_decode($response, true);
+
+            $api_url = "https://api.netatmo.com/api/getuser?access_token="
+                . $params['access_token'];
+
+            $user = json_decode(file_get_contents($api_url));
+            echo("Hello " . $user->body->mail);
+        } else {
+            echo("The state does not match. You may be a victim of CSRF.");
+        }
+
+
 	}
 
 	/**

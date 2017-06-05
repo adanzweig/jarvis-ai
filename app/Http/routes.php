@@ -42,5 +42,6 @@ Route::get('/hue', 'HueController@home');
 Route::get('/netatmo', 'NetatmoController@index');
 Route::get('/netatmo/redir', 'NetatmoController@redir');
 Route::get('/netatmo/webhook', 'NetatmoController@webhook');
+Route::get('/netatmo/test','NetatmoController@test');
 Route::get('/hue/apagar/{id}','HueController@apagar');
 Route::get('/hue/prender/{id}','HueController@prender');
