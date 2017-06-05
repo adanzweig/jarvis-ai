@@ -150,7 +150,7 @@ class NetatmoController extends Controller {
                     'grant_type' => "authorization_code",
                     'client_id' => $app_id,
                     'client_secret' => $app_secret,
-                    'code' => $code,
+                    'code' => $_REQUEST['code'],
                     'redirect_uri' => $my_url,
                     'scope' => "read_camera 20access_camera"
                 )
