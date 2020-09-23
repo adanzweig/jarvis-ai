@@ -16,7 +16,7 @@ class HueController extends Controller {
 	protected $client;
 	function __construct()
     {
-        $this->client = new Phue\Client('192.168.0.10', 'coauPtOkg8KhnshBxP6FeuzdRFOtRqKdSe5ZBPfv');
+        $this->client = new Phue\Client('192.168.0.10', 'xxxxxxxx');
     }
 
     public function index()

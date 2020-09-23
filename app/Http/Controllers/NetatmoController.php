@@ -22,8 +22,8 @@ class NetatmoController extends Controller {
         $scope = Netatmo\Common\NAScopes::SCOPE_READ_CAMERA;
 
         $config = array();
-        $config['client_id'] = "5928b07f65d1c4ee7a8b6f04";
-        $config['client_secret'] = "d68GlJLtPaBQ4JrXrXNZiJjE6ol2eIedWDh78AB";
+        $config['client_id'] = "xxxxxxxx";
+        $config['client_secret'] = "xxxxxxx";
         $config['scope'] = $scope;
         $this->client = new Netatmo\Clients\NAWelcomeApiClient($config);
     }
@@ -68,7 +68,7 @@ class NetatmoController extends Controller {
 	 */
 	public function install()
 	{
-        $this->client->subscribeToWebhook('http://www.adanjz.com:8081');
+        $this->client->subscribeToWebhook('http://xxxxxxxxx');
 
 
 	}
@@ -164,9 +164,9 @@ class NetatmoController extends Controller {
         // Prefer the PHP SDK
 
 
-        $app_id = "5928b07f65d1c4ee7a8b6f04";
-        $app_secret = "d68GlJLtPaBQ4JrXrXNZiJjE6ol2eIedWDh78AB";
-        $my_url = "http://adanjz.com:1000/netatmo/redir";
+        $app_id = "xxxxxxx";
+        $app_secret = "xxxxxxxxxxxx";
+        $my_url = "http://xxxxxxxx/netatmo/redir";
 
         session_start();
 

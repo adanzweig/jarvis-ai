@@ -39,7 +39,7 @@ class HomeController extends Controller {
 
         switch($type){
             case 'spotify':
-                $session = new SpotifyWebAPI\Session('f493972c4f5441b281472e8c66cf7f35', 'aafc85a0f8e64f5696d18dd75898190c', 'http://chepibe/spotify');
+                $session = new SpotifyWebAPI\Session('xxxxxxxx', 'xxxxxxxxxxx', 'http://chepibe/spotify');
                 $api = new SpotifyWebAPI\SpotifyWebAPI();
 
                 // Request a access token with optional scopes
@@ -73,7 +73,7 @@ class HomeController extends Controller {
                 echo $url;
                 break;
             case 'email':
-                $mailbox = new PhpImap\Mailbox('{imap.gmail.com:993/imap/ssl/novalidate-cert}INBOX', 'adanzweig@gmail.com', 'vamosha1491', __DIR__);
+                $mailbox = new PhpImap\Mailbox('{imap.gmail.com:993/imap/ssl/novalidate-cert}INBOX', 'xxxxxxx@gmail.com', 'xxxxxxx', __DIR__);
                 if($query=='unread'){
                     $mailsIds = $mailbox->searchMailbox('UNSEEN');
                     echo count($mailsIds);
